@@ -19,7 +19,7 @@ $ npm install -g evilwebserver
 > ### Run
 Go into the directory you want to server (having an index.html file), then just type
 ```
-$ evilwebserver
+$ evilwebserver -b
 ```
 
 > ### Options
@@ -34,7 +34,7 @@ Options:
   -d, --document-root <documentRoot>    DocumentRoot (default: "./")
   -l, --listening-port <listeningPort>  Listening port (default: 8443)
   -i, --interface <regexpInterface>     Network interface filter (regular expression)
-  -b, --browser                         Open the browser (default: true)
+  -b, --browser                         Open the browser (default: false)
   -h, --help                            display help for command
 
 ```

@@ -24,7 +24,7 @@ module.exports = {
     browser:{
         opt:'-b, --browser',
         help:'Open the browser',
-        default:'true',
+        default:'false',
         type:'boolean'
     }
 
