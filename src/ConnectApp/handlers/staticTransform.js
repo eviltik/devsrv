@@ -4,7 +4,18 @@ const log = require( '../../logger.js' );
 function compileRegexp( str ) {
 
     str = str.replace( /\\\\/, '\\', str );
-    str = new RegExp( str, 'ig' );
+
+    try {
+
+        str = new RegExp( str, 'ig' );
+
+    } catch( e ) {
+
+        throw new Error( `${e.message}` );
+
+    }
+
+    log.debug( 'compileRegexp', str );
 
     return str;
 
@@ -19,22 +30,56 @@ function addHandler( app, config ) {
         return;
 
     }
-    
-    config.textReplacements.forEach( data => {
 
-        const v =  data.value || data.defaultValue;
-        data.pathRegexp = compileRegexp( data.pathRegexp );
-        data.replaceRegexp = compileRegexp( data.replaceRegexp );
+    config.textReplacements.forEach( configTextReplacement => {
 
-        log.debug( `${logPrefix}data`, data.replaceRegexp, '=>', v );
+        let v =  configTextReplacement.value || configTextReplacement.defaultValue;
+        configTextReplacement.pathRegexp = compileRegexp( configTextReplacement.pathRegexp );
+        configTextReplacement.replaceRegexp = compileRegexp( configTextReplacement.replaceRegexp );
 
-        const middleware = injector( function staticTransform( req ) {
+        if ( configTextReplacement.queryVarRegexp ) {
 
-            return req._parsedUrl.pathname.match( data.pathRegexp );
+            configTextReplacement.queryVarRegexp = compileRegexp( configTextReplacement.queryVarRegexp );
 
-        }, function converter( content, req, res, callback ) {
+        }
 
-            content = content.toString().replace( data.replaceRegexp, v );
+        log.debug( `${logPrefix}data`, configTextReplacement.replaceRegexp, '=>', v );
+
+        const middleware = injector( function( req ) {
+
+            return req._parsedUrl.pathname.match( configTextReplacement.pathRegexp );
+
+        }, function( content, req, res, callback ) {
+
+            const qs = new URLSearchParams( req._parsedUrl.query );
+            const varValue = qs.get( configTextReplacement.queryVar );
+
+            if ( varValue ) {
+
+                if ( configTextReplacement.queryVarRegexp ) {
+
+                    if ( varValue.match( configTextReplacement.queryVarRegexp ) ) {
+
+                        // change the value with the one found in the query string
+                        v = varValue;
+
+                    } else {
+
+                        // stay with default value
+
+                    }
+
+                }
+
+            }
+
+            log.debug( `replacing ${configTextReplacement.replaceRegexp} with ${v} ` );
+
+            content = content.toString().replace( configTextReplacement.replaceRegexp, v );
+
+            // reset to default
+
+            v = configTextReplacement.value || configTextReplacement.defaultValue;
 
             callback( null, content );
 
