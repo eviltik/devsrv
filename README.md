@@ -3,13 +3,17 @@
 
 ## Nodejs self signed certificate instant https server for developer
 
-This webserver generate/use self signed SSL Certificates. It also have some minimalists web application server features (redirect, url rewriting, content rewriting)
+This webserver generate/use self signed SSL Certificates. It also have some minimalists web application server features 
+* client redirects
+* url rewriting
+* content rewriting
+  
 
 !! Warning: for development environment only !!
 
 --------
 
->## Command line context 
+>## Local usage (CLI)
 
 > ### Install
 ```
@@ -40,7 +44,7 @@ Options:
 
 ```
 
-> ## Programmatically (nodejs)
+> ## Programmatical usage (nodejs)
 
 > ### Install
 ```
@@ -109,4 +113,4 @@ You can specify theses options if the `config` object.
 
 ## Config file
 
-When starting, the process try to read `./devserver.json` and `./devserver.js`
+When starting, the process try to read `./devserver.json` in the current directory or in specified `--config-file` directory
