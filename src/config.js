@@ -130,7 +130,7 @@ function mergeWithConfigFile( config ) {
     if ( configFromFile ) {
 
         config = deepmerge( configFromFile, config );
-        log.info( `config: merging config with ${config.configFile}` );
+        log.info( `config: use config file ${config.configFile}` );
         return config;
 
     }
