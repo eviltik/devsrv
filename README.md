@@ -1,32 +1,34 @@
-# devserver
+# DevServer : an enhanced https server for developement.
 
 
-## Nodejs self signed certificate instant https server for developer
-
-This webserver generate/use self signed SSL Certificates. It also have some minimalists web application server features 
-* client redirects
-* url rewriting
-* content rewriting
+This webserver generate and use self signed SSL Certificates. It also have some cool delivery features.
   
 
-!! Warning: for development environment only !!
+**!! Warning: for development environment only !!**
 
---------
 
->## Local usage (CLI)
+----------
+## **Command Line Usage**
+----
 
-> ### Install
+> You can use `devserver` as a standalone webserver.
+
+## Install
 ```
 $ npm install -g devserver
 ```
 
-> ### Run
-Go into the directory you want to server (having an index.html file), then just type
+## Run
+> Go into the directory you want to serve (having an index.html file), then just type
 ```
 $ devserver
+config: use config file [...]
+server: start listening on 192.168.1.36:8443
+server: ready
+
 ```
 
-> ### Options
+## Options
 ```
 $ devserver
 Usage: devserver [options]
@@ -44,14 +46,32 @@ Options:
 
 ```
 
-> ## Programmatical usage (nodejs)
+## Optional config file
 
-> ### Install
+> When starting, the process try to read `./devserver.json` in the current directory or in specified `--config-file` directory config option.
+
+
+----------
+## **Programmatical usage (nodejs)**
+-----
+> You can use `devserver` programmatically.
+
+
+## Install
 ```
 $ npm install devserver
 ```
 
-> ### Minimal setup
+## Minimal code
+
+```
+const DevServer = require( 'devserver' );
+const devServerInstance = new DevServer();
+devServerInstance.start();
+```
+
+
+## with config object
 
 ```
 const DevServer = require( 'devserver' );
@@ -72,14 +92,20 @@ const devServerInstance = new DevServer( config );
 
 devServerInstance.start();
 ```
+----------
+## **Features**
+----------
 
-## Features
-
+> v1.0.0 - 02/18/2022
 * [x] Client redirects
 * [x] Url rewriting
+* [x] Static webserver with content rewriting
+
+> v1.1.0 - 02/18/2022
 * [x] Static webserver with content rewriting using query string variable
 
-You can specify theses options if the `config` object.
+
+> You can specify theses options if the `config` object.
 
 
 ```
@@ -112,11 +138,35 @@ You can specify theses options if the `config` object.
 }
 ```
 
-## Optional config file location
+----------
+## **Use with npm, vercel compliant**
+----------
+> package.json
+```
+  "scripts": {
+    "start": "node node_modules/devserver/bin/devserver.js -d ."
+  },
+```
+then
+```
+$ npm start
+config: use config file [...]
+server: start listening on 192.168.1.36:8443
+server: ready
 
-When starting, the process try to read `./devserver.json` in the current directory or in specified `--config-file` directory
+```
 
+
+----------
+## **Roadmap**
+----------
+
+* [ ] Network level throttling
+* [ ] Access log
+* [ ] Systemd install process
+
+
+----------
 ## Debugging
-
-set env var `DEBUG` with any value
-
+----------
+> Set env var `DEBUG` with any value i.e `DEBUG=* devserver`.
