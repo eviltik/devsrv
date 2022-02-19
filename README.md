@@ -76,8 +76,8 @@ devServerInstance.start();
 ## Features
 
 * [x] Client redirects
-* [x] Content rewriting
 * [x] Url rewriting
+* [x] Static webserver with content rewriting using query string variable
 
 You can specify theses options if the `config` object.
 
@@ -103,14 +103,20 @@ You can specify theses options if the `config` object.
     "textReplacements": [
         {
             "queryVar":"r",
-            "replaceString":"THREEVERSION",
-            "defaultValue":"119",
-            "pathRegexp":"/\.(html|js)$/i"
+            "queryVarRegexp":"^0\\.[0-9]{3}$",
+            "replaceRegexp":"DEVSERVER_THREEJSVERSION",
+            "defaultValue":"0.135",
+            "pathRegexp":"(\\.(html|js))|(\\/)$"
         }
     ]
 }
 ```
 
-## Config file
+## Optional config file location
 
 When starting, the process try to read `./devserver.json` in the current directory or in specified `--config-file` directory
+
+## Debugging
+
+set env var `DEBUG` with any value
+
