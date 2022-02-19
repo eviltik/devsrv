@@ -2,6 +2,11 @@
 
 A https server for web development. It generate and use self signed SSL Certificates. It also have some cool delivery features. 
 
+## Motivation
+
+One day to test all standalone webservers with all simple features i need, or code it. I coded it.
+
+
 ## **Command Line Usage**
 
 
