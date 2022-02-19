@@ -1,6 +1,6 @@
 {
-  "name": "evilwebserver",
-  "version": "1.1.1",
+  "name": "https-server",
+  "version": "1.0.0",
   "description": "Instant self signed certificate https web server.",
   "main": "src/index.js",
   "scripts": {
@@ -8,22 +8,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eviltik/evilwebserver.git"
+    "url": "git+https://github.com/eviltik/https-server.git"
   },
   "bin": {
-    "evilwebserver": "./bin/evilwebserver.js"
+    "https-server": "./bin/https-server.js"
   },
   "keywords": [
     "https",
     "webserver",
-    "webxr"
+    "webxr",
+    "threejs"
   ],
   "author": "eviltik",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eviltik/evilwebserver/issues"
+    "url": "https://github.com/eviltik/https-server/issues"
   },
-  "homepage": "https://github.com/eviltik/evilwebserver#readme",
+  "homepage": "https://github.com/eviltik/https-server#readme",
   "dependencies": {
     "commander": "9.0.0",
     "connect": "3.7.0",

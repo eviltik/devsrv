@@ -1,4 +1,4 @@
-# evilwebserver
+# https-server
 
 
 ## Nodejs instant self signed certificate https server
@@ -13,19 +13,19 @@ This webserver use created self signed SSL Certificates.
 
 > ### Install
 ```
-$ npm install -g evilwebserver
+$ npm install -g https-server
 ```
 
 > ### Run
 Go into the directory you want to server (having an index.html file), then just type
 ```
-$ evilwebserver -b
+$ https-server -b
 ```
 
 > ### Options
 ```
-$ evilwebserver
-Usage: evilwebserver [options]
+$ https-server
+Usage: https-server [options]
 
 Instant self signed certificate https web server.
 
@@ -43,13 +43,13 @@ Options:
 
 > ### Install
 ```
-$ npm install evilwebserver
+$ npm install https-server
 ```
 
 > ### Run
 
 ```
-const Server = require( 'evilwebserver' );
+const Server = require( 'https-server' );
 
 const config = {
 
