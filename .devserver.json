@@ -1,0 +1,25 @@
+{
+    "documentRoot": "./",
+    "interfaceRegexp": "wi-fi|eth0",
+    "browser": true,
+    "clientRedirects":[
+        {
+            "urlSrc":"/",
+            "redirectTo":"/tests/index.html"
+        }
+    ],
+    "urlRewrites": [
+        {
+            "urlSrcRegexp":"^/tests2",
+            "replaceWith":"/tests"
+        }
+    ],
+    "textReplacements": [
+        {
+            "queryVar":"r",
+            "replaceRegexp":"THREEVERSION",
+            "defaultValue":"119",
+            "pathRegexp":"\\.(html|js)$"
+        }
+    ]
+}

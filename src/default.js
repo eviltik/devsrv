@@ -15,7 +15,7 @@ module.exports = {
     },
 
     interface:{
-        opt:'-i, --interface <regexpInterface>',
+        opt:'-i, --interface <interfaceRegexp>',
         help:'Network interface filter (regular expression)',
         default:'/wi-fi|eth0/i',
         type:'regexp'
@@ -26,6 +26,13 @@ module.exports = {
         help:'Open the browser',
         default:'false',
         type:'boolean'
+    },
+
+    configFile:{
+        opt:'-c, --config-file <configFile>',
+        help:'Configuration file',
+        default:'./.devserver.json',
+        type:'string'
     }
 
 

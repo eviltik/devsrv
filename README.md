@@ -1,33 +1,33 @@
-# https-server
+# devserver
 
 
-## Nodejs instant self signed certificate https server
+## Nodejs self signed certificate instant https server for developer
 
-This webserver use created self signed SSL Certificates.
+This webserver generate/use self signed SSL Certificates. It also have some minimalists web application server features (redirect, url rewriting, content rewriting)
 
 !! Warning: for development environment only !!
 
 --------
 
->## Command line context
+>## Command line context 
 
 > ### Install
 ```
-$ npm install -g https-server
+$ npm install -g devserver
 ```
 
 > ### Run
 Go into the directory you want to server (having an index.html file), then just type
 ```
-$ https-server -b
+$ devserver
 ```
 
 > ### Options
 ```
-$ https-server
-Usage: https-server [options]
+$ devserver
+Usage: devserver [options]
 
-Instant self signed certificate https web server.
+Instant self signed certificate https web server for developer.
 
 Options:
   -V, --version                         output the version number
@@ -35,6 +35,7 @@ Options:
   -l, --listening-port <listeningPort>  Listening port (default: 8443)
   -i, --interface <regexpInterface>     Network interface filter (regular expression)
   -b, --browser                         Open the browser (default: false)
+  -c, --config-file <configFile>        Path to /path/to/mydevserverconfig.json (default ./.devserver.json)
   -h, --help                            display help for command
 
 ```
@@ -43,25 +44,69 @@ Options:
 
 > ### Install
 ```
-$ npm install https-server
+$ npm install devserver
 ```
 
-> ### Run
+> ### Minimal setup
 
 ```
-const Server = require( 'https-server' );
+const DevServer = require( 'devserver' );
 
 const config = {
 
     documentRoot: './',
     listeningPort: 8443,
     regexpInterface: /wi-fi|eth0/i,
-    browser: true
-
+    browser: true,
+    //features:{
+    // see #Features
+    //}
 };
 
 
-const serverInstance = new Server( config );
+const devServerInstance = new DevServer( config );
 
-serverInstance.start();
+devServerInstance.start();
 ```
+
+## Features
+
+* [x] Client redirects
+* [x] Content rewriting
+* [x] Url rewriting
+
+You can specify theses options if the `config` object.
+
+
+```
+{
+    "documentRoot": "./",
+    "listeningPort": 8443,
+    "interfaceRegexp": "/wi-fi|eth0/i",
+    "browser": true,
+    "clientRedirects":[
+        {
+            "urlSrc":"/",
+            "redirectTo":"/tests/index.html"
+        }
+    ],
+    "urlRewrites": [
+        {
+            "urlSrcRegexp":"^/test2",
+            "replaceBy":"/test"
+        }
+    ],
+    "textReplacements": [
+        {
+            "queryVar":"r",
+            "replaceString":"THREEVERSION",
+            "defaultValue":"119",
+            "pathRegexp":"/\.(html|js)$/i"
+        }
+    ]
+}
+```
+
+## Config file
+
+When starting, the process try to read `./devserver.json` and `./devserver.js`
