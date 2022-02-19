@@ -17,9 +17,10 @@
     "textReplacements": [
         {
             "queryVar":"r",
-            "replaceRegexp":"THREEVERSION",
-            "defaultValue":"119",
-            "pathRegexp":"\\.(html|js)$"
+            "queryVarRegexp":"^0\\.[0-9]{3}$",
+            "replaceRegexp":"DEVSERVER_THREEJSVERSION",
+            "defaultValue":"0.135",
+            "pathRegexp":"(\\.(html|js))|(\\/)$"
         }
     ]
 }
