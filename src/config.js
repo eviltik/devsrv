@@ -104,10 +104,10 @@ function mergeWithConfigFile( config ) {
 
     let configFromFile;
 
-    if ( !fs.pathExistsSync( config.configFile ) ) {
+    if ( fs.pathExistsSync( config.configFile ) ) {
 
-        log.error( `error: config file ${config.configFile} not found` );
-        process.exit( -1 );
+        log.debug( `error: config file ${config.configFile} not found` );
+        return config;
 
     }
 
