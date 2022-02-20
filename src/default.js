@@ -31,7 +31,7 @@ module.exports = {
     configFile:{
         opt:'-c, --config-file <configFile>',
         help:'Configuration file',
-        default:'./.devserver.json',
+        default:'./.httpsnode.json',
         type:'string'
     }
 

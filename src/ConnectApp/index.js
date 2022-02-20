@@ -3,8 +3,6 @@ const handlers = require( './handlers/index.js' );
 
 function prepareConfig( app, config ) {
 
-    app.devserverconfig = config;
-
     // deliver static files with text replacement
     handlers.staticTransform.addHandler( app, config );
 
