@@ -1,4 +1,4 @@
-# DevServer
+# httpsnode
 
 A https server for web development. It generate and use self signed SSL Certificates. It also have some cool delivery features. 
 
@@ -10,17 +10,17 @@ One day to test all standalone webservers with all simple features i need, or co
 ## **Command Line Usage**
 
 
-> You can use `devserver` as a standalone webserver.
+> You can use `httpsnode` as a standalone webserver.
 
 #### Install
 ```
-$ npm install -g devserver
+$ npm install -g httpsnode
 ```
 
 #### Run
 > Go into the directory you want to serve (having an index.html file), then just type
 ```
-$ devserver
+$ httpsnode
 config: use config file [...]
 server: start listening on 192.168.1.36:8443
 server: ready
@@ -28,8 +28,8 @@ server: ready
 
 #### Options
 ```
-$ devserver
-Usage: devserver [options]
+$ httpsnode
+Usage: httpsnode [options]
 
 Instant self signed certificate https web server for developer.
 
@@ -39,39 +39,39 @@ Options:
   -l, --listening-port <listeningPort>  Listening port (default: 8443)
   -i, --interface <regexpInterface>     Network interface filter (regular expression)
   -b, --browser                         Open the browser (default: false)
-  -c, --config-file <configFile>        Path to /path/to/mydevserverconfig.json (default ./.devserver.json)
+  -c, --config-file <configFile>        Path to /path/to/myhttpsnodeconfig.json (default ./.httpsnode.json)
   -h, --help                            display help for command
 ```
 
 #### Optional config file
 
-> When starting, the process try to read `./devserver.json` in the current directory or in specified `--config-file` directory config option.
+> When starting, the process try to read `./httpsnode.json` in the current directory or in specified `--config-file` directory config option.
 
 
 
 ## **Programmatical usage (nodejs)**
 
-> You can use `devserver` programmatically.
+> You can use `httpsnode` programmatically.
 
 
 #### Install
 ```
-$ npm install devserver
+$ npm install httpsnode
 ```
 
 #### Minimal js code
 
 ```
-const DevServer = require( 'devserver' );
-const devServerInstance = new DevServer();
-devServerInstance.start();
+const Server = require( 'httpsnode' );
+const serverInstance = new Server();
+serverInstance.start();
 ```
 
 
 #### With a config object
 
 ```
-const DevServer = require( 'devserver' );
+const Server = require( 'httpsnode' );
 
 const config = {
 
@@ -84,9 +84,9 @@ const config = {
     //}
 };
 
-const devServerInstance = new DevServer( config );
+const serverInstance = new Server( config );
 
-devServerInstance.start();
+serverInstance.start();
 ```
 
 ## **Features**
@@ -141,7 +141,7 @@ devServerInstance.start();
 > npm install then add start script in your `package.json`
 ```
   "scripts": {
-    "start": "node node_modules/devserver/bin/devserver.js -d ."
+    "start": "node node_modules/httpsnode/bin/httpsnode.js -d ."
   },
 ```
 then
@@ -151,8 +151,6 @@ config: use config file [...]
 server: start listening on [...]
 server: ready
 ```
-
-You can use `devserver` with vercel by example.
 
 
 ## **Roadmap**
@@ -166,4 +164,4 @@ You can use `devserver` with vercel by example.
 
 ## Debugging
 
-> Set env var `DEBUG` with any value i.e `DEBUG=* devserver`.
+> Set env var `DEBUG` with any value i.e `DEBUG=* httpsnode`.

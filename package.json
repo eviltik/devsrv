@@ -1,5 +1,5 @@
 {
-  "name": "devserver",
+  "name": "httpsnode",
   "version": "1.1.0",
   "description": "Instant self signed certificate https development web server.",
   "main": "src/index.js",
@@ -8,10 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eviltik/devserver.git"
+    "url": "git+https://github.com/eviltik/httpsnode.git"
   },
   "bin": {
-    "devserver": "./bin/devserver.js"
+    "httpsnode": "./bin/httpsnode.js"
   },
   "keywords": [
     "https",
@@ -23,9 +23,9 @@
   "author": "eviltik",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eviltik/devserver/issues"
+    "url": "https://github.com/eviltik/httpsnode/issues"
   },
-  "homepage": "https://github.com/eviltik/devserver#readme",
+  "homepage": "https://github.com/eviltik/httpsnode#readme",
   "dependencies": {
     "commander": "9.0.0",
     "connect": "3.7.0",
