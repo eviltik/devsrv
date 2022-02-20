@@ -4,7 +4,7 @@ A nodejs http(s) server for web development with some cool features.
 
 ## **Motivation**
 
-Two day to test all standalone webservers npm module with all simple features i need, or code it. I coded it.
+Two day to test all standalone webservers npm module with all simple features i need, vs code it. I coded it.
 
 ## **Features**
 
@@ -151,7 +151,7 @@ serverInstance.start();
 > npm install then add start script in your `package.json`
 ```
   "scripts": {
-    "start": "node node_modules/httpsnode/bin/httpsnode.js -d ."
+    "start": "node node_modules/devsrv/bin/devsrv.js -d ."
   },
 ```
 then
