@@ -1,7 +1,10 @@
-# devsrv
+# **devsrv**
 
-A http(s) server for web development with some cool features. 
+A nodejs http(s) server for web development with some cool features. 
 
+## **Motivation**
+
+Two day to test all standalone webservers npm module with all simple features i need, or code it. I coded it.
 
 ## **Features**
 
@@ -22,16 +25,10 @@ A http(s) server for web development with some cool features.
 * [ ] Npm build script (releases static files, serverless provider compliant i.e vercel )
 * [ ] Network level throttling (simulate slow network for testing)
 * [ ] Access log
-* [ ] Systemd install process ()
-
-
-## Motivation
-
-Two day to test all standalone webservers npm module with all simple features i need, or code it. I coded it.
+* [ ] Systemd template
 
 
 ## **Command Line Usage**
-
 
 > You can use `devsrv` as a standalone webserver.
 
