@@ -18,7 +18,7 @@
         {
             "queryVar":"r",
             "queryVarRegexp":"^0\\.[0-9]{3}$",
-            "replaceRegexp":"DEVSERVER_THREEJSVERSION",
+            "replaceRegexp":"THREEJSVERSION",
             "defaultValue":"0.135",
             "pathRegexp":"(\\.(html|js))|(\\/)$"
         }

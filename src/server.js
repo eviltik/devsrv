@@ -22,9 +22,9 @@ function Server ( config = {} ) {
         
         let protocol = https;
 
-        if ( process.env.config.CODESANDBOX_SSE ) {
+        if ( process.env.CODESANDBOX_SSE ) {
 
-            log.info( 'server: codesandbox detected' );
+            log.info( 'server: codesandbox container detected' );
             config.listeningIpAddr = '127.0.0.1';
             protocol = http;
 
