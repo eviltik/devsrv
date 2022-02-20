@@ -13,6 +13,9 @@
   "bin": {
     "httpsnode": "./bin/httpsnode.js"
   },
+  "script":{
+    "start":"node ./bin/httpsnode.js"
+  },
   "keywords": [
     "https",
     "webserver",
