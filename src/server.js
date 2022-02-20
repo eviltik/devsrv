@@ -1,4 +1,5 @@
 const https = require( 'https' );
+const http = require( 'http' );
 
 const open = require( 'open' );
 
@@ -18,12 +19,23 @@ function Server ( config = {} ) {
     const serverOptions = {};
     
     function serverStart( config, callback ) {
-            
+        
+        let protocol = https;
+
+        if ( process.env.config.CODESANDBOX_SSE ) {
+
+            log.info( 'server: codesandbox detected' );
+            config.listeningIpAddr = '127.0.0.1';
+            protocol = http;
+
+        }
+
+          
         log.info( `server: start listening on ${config.listeningIpAddr}:${config.listeningPort}` );
 
         serverOptions.port = config.listeningPort;
 
-        const server = https
+        const server = protocol
             .createServer( serverOptions, app )
             .listen( serverOptions.port, config.listeningIpAddr );
 
