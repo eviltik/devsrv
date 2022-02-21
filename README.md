@@ -6,23 +6,26 @@ A nodejs http(s) server for web development with some cool features.
 
 Two day to test all standalone webservers npm module with all simple features i need, vs code it. I coded it.
 
-## **Features**
+## **Changelog**
 
 > **v1.0.0 - 02/18/2022**
-* [x] Use HTTPS with generated self signed SSL certificates by default
-* [x] Client redirects
-* [x] Url rewriting
-* [x] Static webserver with content rewriting
+* [x] Add: use HTTPS with generated self signed SSL certificates by default
+* [x] Add: client redirects handler
+* [x] Add: url rewriting handler
+* [x] Add: static content webserver with content rewriting
+* [x] Add: Open the web browser
 
 > **v1.1.0 - 02/18/2022**
-* [x] Static webserver with content rewriting using query string variable
+* [x] Add: static webserver with content rewriting using query string variable
 
-> **v1.3.0 - 03/18/2022**
-* [x] Detect codesandbox, then use http rather than https, because of codesandbox reverse proxy ssl termination
+> **v1.3.0 - 02/18/2022**
+* [x] Add: detect Codesandbox, then use http rather than https, because of Codesandbox reverse proxy ssl termination
 
+> **v1.3.1 - 02/21/2022**
+* [x] Update: Code refactor
+* [ ] Npm build script (releases static files, serverless provider compliant i.e vercel ) - in progress
 
 ## **Roadmap**
-* [ ] Npm build script (releases static files, serverless provider compliant i.e vercel )
 * [ ] Network level throttling (simulate slow network for testing)
 * [ ] Access log
 * [ ] Systemd template
@@ -58,7 +61,8 @@ Options:
   -d, --document-root <documentRoot>    DocumentRoot (default: "./")
   -l, --listening-port <listeningPort>  Listening port (default: 8443)
   -i, --interface <regexpInterface>     Network interface filter (regular expression)
-  -b, --browser                         Open the browser (default: false)
+  -o, --open                            Open the browser on start (default: false)
+  -b, --build                           Trigger build process
   -c, --config-file <configFile>        Path to /path/to/mydevsrvconfig.json (default ./.devsrv.json)
   -h, --help                            display help for command
 ```

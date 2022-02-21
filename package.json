@@ -1,11 +1,12 @@
 {
   "name": "devsrv",
   "version": "1.3.0",
-  "description": "Instant self signed certificate https development web server.",
+  "description": "Nodejs http(s) server for web development with some cool features. ",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node ./bin/devsrv.js"
+    "start":"node ./bin/devsrv.js",
+    "build":"node ./bin/devsrv.js -b"
   },
   "repository": {
     "type": "git",

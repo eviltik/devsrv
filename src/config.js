@@ -1,4 +1,3 @@
-
 const deepmerge = require( 'deepmerge' );
 const path = require( 'path' );
 const fs = require( 'fs-extra' );
@@ -8,61 +7,44 @@ const utils = require ( './utils.js' );
 
 function parseNumber( key, value ) {
 
-    const v = parseInt( value );
+    value = parseInt( value );
 
-    if ( isNaN( v ) ) {
-        
+    if ( isNaN( value ) )
         throw new Error( `option ${key} should be a number` );
 
-    }
-
-    return v;
+    return value;
 
 }
 
 function parsePort( key, value ) {
 
-    const v = parseInt( value );
+    value = parseInt( value );
             
-    if ( isNaN( v ) ||  v < 1024 || v > 65535 ) {
-
+    if ( isNaN( value ) ||  value < 1024 || value > 65535 )
         throw new Error( `option ${key} should be a number between 1000 and 65535 ` );
 
-    }
-
-    return v;
+    return value;
 
 }
 
 function parseBoolean( key, value ) {
     
-    let v;
-
-    if ( value.match( /true/i ) ) {
-
-        v = true;
-
-    } else if ( value.match( /false/i ) ) {
-
-        v = false;
-
-    } else {
-
+    if ( value.match( /true/i ) )
+        value = true;
+    else if ( value.match( /false/i ) )
+        value = false;
+    else
         throw new Error( `option ${key} should be a boolean (true or false)` );
 
-    }
-
-    return v;
+    return value;
 
 }
 
 function parseRegexp( key, value ) {
-
-    let v;
-    
+ 
     try {
 
-        v = new RegExp( value );
+        value = new RegExp( value );
     
     } catch( err ) {
 
@@ -70,7 +52,7 @@ function parseRegexp( key, value ) {
     
     }
     
-    return v;
+    return value;
 
 }
 
@@ -84,10 +66,10 @@ function clean( config ) {
 
         switch ( option.type ) {
 
-        case 'number':  value = parseNumber( key, option.default ); break;
-        case 'port':    value = parsePort( key, option.default ); break;
-        case 'boolean': value = parseBoolean( key, option.default ); break;
-        case 'regexp':  value = parseRegexp( key, option.default ); break;
+        case 'number':  value = parseNumber( key, option.default );     break;
+        case 'port':    value = parsePort( key, option.default );       break;
+        case 'boolean': value = parseBoolean( key, option.default );    break;
+        case 'regexp':  value = parseRegexp( key, option.default );     break;
         default:        value = option.default.toString();
 
         }
@@ -140,7 +122,6 @@ function mergeWithConfigFile( config ) {
 }
 
 function prepare( defaultConfig, config ) {
-
 
     config = deepmerge( defaultConfig, config );
 

@@ -14,12 +14,6 @@ function prepareConfig( app, config ) {
 
     // deliver static files with text replacement
     handlers.staticServer.addHandler( app, config );
-    
-    /*
-
-    // always the last handler (replacing string in response body)
-    handlers.textReplacements.addHandler( app, config );
-    */
 
     return app;
 

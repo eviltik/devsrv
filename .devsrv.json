@@ -1,7 +1,7 @@
 {
     "documentRoot": "./",
     "interfaceRegexp": "wi-fi|eth0",
-    "browser": true,
+    "openBrowser": true,
     "clientRedirects":[
         {
             "urlSrc":"/",

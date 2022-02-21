@@ -1,3 +1,4 @@
+const assert = require( 'assert' );
 const path = require( 'path' );
 const log = require( './logger.js' );
 const fs = require( 'fs-extra' );
@@ -60,8 +61,38 @@ function getIpAddress( interfaceRegexp ) {
 
 }
 
+function compileRegexp( str , flags ) {
+
+    assert( typeof str === 'string', 'str should be a string' );
+    
+    if ( !flags )
+        flags = 'ig';
+
+    // TODO: devsrv.js rather than devsrv.json so we can use native regexp to avoid this security issue
+    // SECURITY: don't reuse this code if you are not sure the value is coming from a trusted source
+
+    str = str.replace( /\\\\/, '\\', str );
+    
+
+    try {
+
+        str = new RegExp( str, flags );
+
+    } catch( e ) {
+
+        throw new Error( `${e.message}` );
+
+    }
+
+    log.debug( 'compileRegexp', str );
+
+    return str;
+
+}
+
 module.exports = {
     getPackageName,
     getHome,
-    getIpAddress
+    getIpAddress,
+    compileRegexp,
 };

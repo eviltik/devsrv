@@ -21,8 +21,8 @@ module.exports = {
         type:'regexp'
     },
 
-    browser:{
-        opt:'-b, --browser',
+    openBrowser:{
+        opt:'-o, --openBrowser',
         help:'Open the browser',
         default:'false',
         type:'boolean'
@@ -31,7 +31,7 @@ module.exports = {
     configFile:{
         opt:'-c, --config-file <configFile>',
         help:'Configuration file',
-        default:'./.httpsnode.json',
+        default:'./.devsrv.json',
         type:'string'
     }
 

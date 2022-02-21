@@ -1,96 +1,90 @@
+const assert = require( 'assert' );
 const injector = require( 'connect-injector' );
+
 const log = require( '../../logger.js' );   
-
-function compileRegexp( str ) {
-
-    str = str.replace( /\\\\/, '\\', str );
-
-    try {
-
-        str = new RegExp( str, 'ig' );
-
-    } catch( e ) {
-
-        throw new Error( `${e.message}` );
-
-    }
-
-    log.debug( 'compileRegexp', str );
-
-    return str;
-
-}
+const utils = require( '../../utils.js' );
 
 function addHandler( app, config ) {
 
+    assert( typeof app === 'function', 'app should be a function' );
+    assert( typeof config == 'object', 'config should be an object' );
+
     const logPrefix = 'staticTransform: ';
 
-    if ( !config.textReplacements || !config.textReplacements.length ) {
+    initTextReplacements();
 
-        return;
+    function initTextReplacements() {
 
+        if ( !config.textReplacements || !config.textReplacements.length )
+            return;
+
+        config.textReplacements.forEach( ctr => {
+
+            // precompile regexp
+            ctr.pathRegexp = utils.compileRegexp( ctr.pathRegexp );
+            ctr.replaceRegexp = utils.compileRegexp( ctr.replaceRegexp );
+            ctr.queryVarRegexp = utils.compileRegexp( ctr.queryVarRegexp );
+    
+            const middleware = injector(
+                req => {
+    
+                    return shouldInject( ctr, req );
+    
+                },
+                ( content, req, res, callback ) => {
+    
+                    injectVars( ctr, content, req, res, callback );
+    
+                }
+            );
+    
+            // understandable debug logs
+            Object.defineProperty(
+                middleware,
+                'name',
+                { value: 'staticTransform' }
+            );
+    
+            // make connect app use this middleware
+            app.use( middleware ) ;
+    
+        } );
+        
     }
 
-    config.textReplacements.forEach( configTextReplacement => {
+    function shouldInject( ctr, req ) {
 
-        let v =  configTextReplacement.value || configTextReplacement.defaultValue;
-        configTextReplacement.pathRegexp = compileRegexp( configTextReplacement.pathRegexp );
-        configTextReplacement.replaceRegexp = compileRegexp( configTextReplacement.replaceRegexp );
+        const url = req._parsedUrl.pathname;
+        const result = url.match( ctr.pathRegexp );
+        log.debug( `staticTransform: shouldInject: ${url} ${result}` );
+        
+        return result;
 
-        if ( configTextReplacement.queryVarRegexp ) {
+    }
+    
+    function injectVars( ctr, content, req, res, callback ) {
 
-            configTextReplacement.queryVarRegexp = compileRegexp( configTextReplacement.queryVarRegexp );
+        // look for query var
+        const qs = new URLSearchParams( req._parsedUrl.query );
+        const queryStringVarValue = qs.get( ctr.queryVar );
+        
+        // TODO: i don't remember why i did that, there is only defaultValue currently
+        let finalValue =  ctr.value || ctr.defaultValue;
 
-        }
+        // change the value with the one found in the query string 
+        if ( queryStringVarValue && ctr.queryVarRegexp && queryStringVarValue.match( ctr.queryVarRegexp ) )
+            finalValue = queryStringVarValue;
 
-        log.debug( `${logPrefix}data`, configTextReplacement.replaceRegexp, '=>', v );
+        // replace content
+        content = content.toString().replace( ctr.replaceRegexp, finalValue );
+        log.debug( `${logPrefix}`, ctr.replaceRegexp, '=>', finalValue );
 
-        const middleware = injector( function( req ) {
+        // reset to original value
+        finalValue = ctr.value || ctr.defaultValue;
 
-            return req._parsedUrl.pathname.match( configTextReplacement.pathRegexp );
+        callback( null, content );
 
-        }, function( content, req, res, callback ) {
-
-            const qs = new URLSearchParams( req._parsedUrl.query );
-            const varValue = qs.get( configTextReplacement.queryVar );
-
-            if ( varValue ) {
-
-                if ( configTextReplacement.queryVarRegexp ) {
-
-                    if ( varValue.match( configTextReplacement.queryVarRegexp ) ) {
-
-                        // change the value with the one found in the query string
-                        v = varValue;
-
-                    } else {
-
-                        // stay with default value
-
-                    }
-
-                }
-
-            }
-
-            log.debug( `replacing ${configTextReplacement.replaceRegexp} with ${v} ` );
-
-            content = content.toString().replace( configTextReplacement.replaceRegexp, v );
-
-            // reset to default
-
-            v = configTextReplacement.value || configTextReplacement.defaultValue;
-
-            callback( null, content );
-
-        } );
-
-        // understandable debug logs
-        Object.defineProperty( middleware, 'name', { value: 'staticTransform' } );
-
-        app.use( middleware ) ;
-
-    } );
+    }
 
 }
 

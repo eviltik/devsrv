@@ -4,14 +4,20 @@ const log = require( './logger.js' );
 const utils = require ( './utils.js' );
 const path = require( 'path' );
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+// we are the server, we don't need this
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 
 function generateSSLCertificates( callback ) {
 
     log.debug( 'ssl: generateSSLCertificates: generating new self signed SSL Certificates ...' );
 
-    pem.createCertificate( { days: 365, selfSigned: true }, ( err, keys ) => {
+    const pemOptions = { 
+        days: 365, 
+        selfSigned: true 
+    };
+
+    pem.createCertificate( pemOptions, ( err, keys ) => {
         
         if ( err ) throw err;
 
@@ -33,15 +39,17 @@ function readCertificates( options, callback ) {
 
     try {
 
-        //log.info( `readCertificates: reading self signed private key ${fileKey}` );
-        //log.info( `readCertificates: reading self signed certificate ${fileCrt}` );
+        log.debug( `readCertificates: reading self signed private key ${fileKey}` );
+        log.debug( `readCertificates: reading self signed certificate ${fileCrt}` );
 
         options.key = fs.readFileSync( fileKey );
         options.cert = fs.readFileSync( fileCrt );
         //options.ca = fs.readFileSync( fileCa );
 
     } catch( e ) {
+
         // file can not be read or does not exists
+
     }
 
     
@@ -58,7 +66,7 @@ function readCertificates( options, callback ) {
             fs.writeFileSync( fileCrt, opts.cert.toString() );
             options.key = opts.key;
             options.cert = opts.cert;
-            callback();
+            callback && callback();
 
         } );
 
@@ -67,7 +75,7 @@ function readCertificates( options, callback ) {
         log.debug( `ssl: readCertificates: using self signed private key ${fileKey}` );
         log.debug( `ssl: readCertificates: using self signed certificate ${fileCrt}` );
 
-        callback();
+        callback && callback();
 
     }
             
