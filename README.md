@@ -4,14 +4,14 @@ A nodejs http(s) server for web development with some cool features.
 
 ## **Motivation**
 
-Two day to test all standalone webservers npm module with all simple features i need, vs code it. I coded it.
+How many dats to test all standalone webservers npm module with all simple features i'm looking for, vs time to code it. I coded it.
 
 ## **Changelog**
 
 > **v1.0.0 - 02/18/2022**
 * [x] Add: use HTTPS with generated self signed SSL certificates by default
 * [x] Add: client redirects handler
-* [x] Add: url rewriting handler
+* [x] Add: url rewriting handler (proxy)
 * [x] Add: static content webserver with content rewriting
 * [x] Add: Open the web browser
 
@@ -23,12 +23,15 @@ Two day to test all standalone webservers npm module with all simple features i 
 
 > **v1.3.1 - 02/21/2022**
 * [x] Update: Code refactor
-* [ ] Npm build script (releases static files, serverless provider compliant i.e vercel ) - in progress
+* [x] Add: npm build script (releases static files, serverless provider compliant i.e vercel ) - in progress
 
 ## **Roadmap**
+* [ ] CI tests
 * [ ] Network level throttling (simulate slow network for testing)
 * [ ] Access log
 * [ ] Systemd template
+* [ ] Websocket proxy ?
+* [ ] WebRTC ?
 
 
 ## **Command Line Usage**

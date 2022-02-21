@@ -3,19 +3,13 @@ const openBrowser = require( 'open' );
 const log = require( './logger.js' );
 const ssl = require( './ssl.js' );
 const ConnectApp = require( './ConnectApp/index.js' );
-const configHelper = require( './config.js' );
 
 const protocols = {
     https:require( 'https' ),
     http:require( 'http' )
 };
 
-const OPTIONS = require( './options.js' );
-
-
 function Server ( config = {} ) {
-
-    config = configHelper.prepare( OPTIONS, config );
 
     const app = new ConnectApp( config );
     const serverOptions = {

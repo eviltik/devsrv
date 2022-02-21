@@ -33,10 +33,13 @@ module.exports = {
         help:'Configuration file',
         default:'./.devsrv.json',
         type:'string'
+    },
+
+    build:{
+        opt:'-b, --build',
+        help:'Trigger the build process',
+        default:'false',
+        type:'boolean'
     }
 
-
 };
-
-
-

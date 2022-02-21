@@ -30,5 +30,6 @@ setProgramOptions( program, config );
 
 program.parse( process.argv );
 
-
-module.exports = program.opts();
+module.exports = {
+    opts:program.opts()
+};
