@@ -2,7 +2,7 @@ const assert = require( 'assert' );
 const log = require( '../../logger.js' );
 
 function addHandler( app, config ) {
-    
+
     assert( typeof app === 'function', 'app should be a function' );
     assert( typeof config == 'object', 'config should be an object' );
     
@@ -11,29 +11,33 @@ function addHandler( app, config ) {
     
     log.debug( `clientRedirects: addHandler: adding ${config.clientRedirects.length} redirect(s)` );
 
-    app.use( function redirect( req, res, next ) {
+    function testRedirect( req, res, next ) {
 
-        let foundRedirect = false;
+        let foundRedirect = null;
 
         config.clientRedirects.forEach( redirect => {
             
-            if ( foundRedirect )
-                return;
-
-            if ( req._parsedUrl.path !== redirect.urlSrc ) 
-                return;
-
-            foundRedirect = true;
-            res.writeHead( 302, { location: redirect.redirectTo } );
-            res.end();
-            return;
+            if ( !foundRedirect )
+                if ( req._parsedUrl.path.toString() === redirect.urlSrc.toString() )
+                    foundRedirect = redirect;
 
         } );
 
-        if ( !foundRedirect )
+        if ( !foundRedirect ) {
+
             next();
 
-    } );
+        } else {
+
+            log.debug( `clientRedirect: sending redirect ${foundRedirect.urlSrc} => ${foundRedirect.redirectTo}` );
+            res.writeHead( 302, { location: foundRedirect.redirectTo } );
+            res.end();
+            
+        }
+
+    }
+
+    app.use( testRedirect );
 
 }
 

@@ -1,7 +1,10 @@
+const assert = require( 'assert' );
 const openBrowser = require( 'open' );
 
 const log = require( './logger.js' );
 const ssl = require( './ssl.js' );
+const utils = require ( './utils.js' );
+
 const ConnectApp = require( './ConnectApp/index.js' );
 
 const protocols = {
@@ -10,6 +13,10 @@ const protocols = {
 };
 
 function Server ( config = {} ) {
+
+    assert( typeof config == 'object', 'config should be an object' );
+
+    config.listeningIpAddr = utils.getIpAddress( config.interfaceRegexp );
 
     const app = new ConnectApp( config );
     const serverOptions = {

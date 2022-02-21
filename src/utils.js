@@ -7,8 +7,6 @@ const networkInterfaces = require( 'os' ).networkInterfaces;
 function getPackageName() {
 
     const packageJsonFile = path.resolve( __dirname,'..', 'package.json' );
-    log.debug( `util: getPackageName: reading ${packageJsonFile}` );
-
     return fs.readJsonSync( packageJsonFile ).name;
 
 }
