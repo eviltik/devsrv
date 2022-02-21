@@ -15,6 +15,9 @@ function prepareConfig( app, config ) {
     // deliver static files with text replacement
     handlers.staticServer.addHandler( app, config );
 
+    // directory listing
+    handlers.explorer.addHandler( app, config );
+
     return app;
 
 }
