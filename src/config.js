@@ -3,7 +3,8 @@ const path = require( 'path' );
 const fs = require( 'fs-extra' );
 
 const log = require( './logger.js' );
-const utils = require ( './utils.js' );
+
+let configCache;
 
 function parseNumber( key, value ) {
 
@@ -82,7 +83,11 @@ function clean( config ) {
 
 function mergeWithConfigFile( config ) {
 
-    if ( !config.configFile ) return;
+    if ( !config.configFile )
+        return;
+
+    if ( configCache )
+        return configCache;
 
     let configFromFile;
 
@@ -112,7 +117,10 @@ function mergeWithConfigFile( config ) {
     if ( configFromFile ) {
 
         config = deepmerge( configFromFile, config );
-        log.info( `config: use config file ${config.configFile}` );
+        log.info( `use config file ${config.configFile}` );
+
+        configCache = config;
+
         return config;
 
     }
@@ -121,7 +129,7 @@ function mergeWithConfigFile( config ) {
 
 }
 
-function prepare( defaultConfig, config ) {
+function prepare( defaultConfig, config = {} ) {
 
     config = deepmerge( defaultConfig, config );
 
@@ -133,7 +141,6 @@ function prepare( defaultConfig, config ) {
     }
 
     config.interfaceRegexp = new RegExp( config.interfaceRegexp, 'i' );
-    config.listeningIpAddr = utils.getIpAddress( config.interfaceRegexp );
 
     return config;
 
