@@ -22,5 +22,12 @@
             "defaultValue":"0.135",
             "pathRegexp":"(\\.(html|js))|(\\/)$"
         }
-    ]
+    ],
+    "buildOptions": {
+        "src":"./tests",
+        "dst":"./dist/v1.0.0/threejs.119",
+        "replaceRegexp":"THREEJSVERSION",
+        "defaultValue":"0.135",
+        "fileRegexp":"\\.(html|js)$"
+    }
 }

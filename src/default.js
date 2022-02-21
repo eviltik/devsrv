@@ -7,6 +7,13 @@ module.exports = {
         type:'string'
     },
 
+    explorer:{
+        opt:'-e, --explorer',
+        help:'Directory listing',
+        default:'false',
+        type:'boolean'
+    },
+
     listeningPort:{
         opt:'-l, --listening-port <listeningPort>',
         help:'Listening port',
@@ -22,7 +29,7 @@ module.exports = {
     },
 
     openBrowser:{
-        opt:'-o, --openBrowser',
+        opt:'-o, --open-browser',
         help:'Open the browser',
         default:'false',
         type:'boolean'
@@ -37,9 +44,23 @@ module.exports = {
 
     build:{
         opt:'-b, --build',
-        help:'Trigger the build process',
+        help:'trigger build process',
         default:'false',
         type:'boolean'
+    },
+
+    buildDst:{
+        opt:'--build-dst <buildDst>',
+        help:'build dist directory',
+        default:'./dist/1.0.0/',
+        type:'string'
+    },
+
+    buildSrc:{
+        opt:'--build-src <buildSrc>',
+        help:'build src directory',
+        default:'./public',
+        type:'string'
     }
 
 };
