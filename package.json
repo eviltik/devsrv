@@ -1,5 +1,5 @@
 {
-  "name": "devsrv",
+  "name": "@eviltik/devsrv",
   "version": "1.3.0",
   "description": "Nodejs http(s) server for web development with some cool features. ",
   "main": "src/index.js",
