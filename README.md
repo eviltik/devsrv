@@ -22,12 +22,10 @@ How many dats to test all standalone webservers npm module with all simple featu
 * [x] Add: detect Codesandbox, then use http rather than https, because of Codesandbox reverse proxy ssl termination
 
 > **v1.3.1 - 02/21/2022**
-* [x] Update: Code refactor
+* [x] Change: code refactor
+* [x] Change: change config file name 
 * [x] Add: explorer (directory listing)
 * [x] Add: npm build script (releases static files, serverless provider compliant i.e vercel )
-
-> **v1.3.2 - 02/21/2022**
-* [x] Update: change config file name
 
 ## **Roadmap**
 * [ ] CI tests
