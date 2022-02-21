@@ -23,7 +23,8 @@ How many dats to test all standalone webservers npm module with all simple featu
 
 > **v1.3.1 - 02/21/2022**
 * [x] Update: Code refactor
-* [x] Add: npm build script (releases static files, serverless provider compliant i.e vercel ) - in progress
+* [x] Add: explorer (directory listing)
+* [x] Add: npm build script (releases static files, serverless provider compliant i.e vercel )
 
 ## **Roadmap**
 * [ ] CI tests
@@ -127,7 +128,7 @@ serverInstance.start();
     "documentRoot": "./",
     "listeningPort": 8443,
     "interfaceRegexp": "/wi-fi|eth0/i",
-    "browser": true,
+    "openBrowser": true,
     "clientRedirects":[
         {
             "urlSrc":"/",
@@ -144,18 +145,26 @@ serverInstance.start();
         {
             "queryVar":"r",
             "queryVarRegexp":"^0\\.[0-9]{3}$",
-            "replaceRegexp":"DEVSERVER_THREEJSVERSION",
-            "defaultValue":"0.135",
+            "replaceRegexp":"THREEJSVERSION",
+            "defaultValue":"0.119",
             "pathRegexp":"(\\.(html|js))|(\\/)$"
         }
-    ]
+    ],
+    "buildOptions": {
+        "src":"./tests",
+        "dst":"./dist/v1.0.0/threejs-r119",
+        "replaceRegexp":"THREEJSVERSION",
+        "defaultValue":"0.119",
+        "pathRegexp":"\\.(html|js)$"
+    }
+
 }
 ```
 
 
 ## **Use with npm**
 
-> npm install then add start script in your `package.json`
+> `npm install devsrv` then add start script in your `package.json`
 ```
   "scripts": {
     "start": "node node_modules/devsrv/bin/devsrv.js -d ."
