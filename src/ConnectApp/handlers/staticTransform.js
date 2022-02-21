@@ -56,9 +56,12 @@ function addHandler( app, config ) {
 
         const url = req._parsedUrl.pathname;
         const result = url.match( ctr.pathRegexp );
-        log.debug( `staticTransform: shouldInject: ${url} ${result}` );
+        if ( result ) 
+            log.debug( `staticTransform: shouldInject: ${url} true` );
+        else
+            log.debug( `staticTransform: shouldInject: ${url} false` );
         
-        return result;
+        return req._parsedUrl.pathname.url.match( ctr.pathRegexp );
 
     }
     
