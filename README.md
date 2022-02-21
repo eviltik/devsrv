@@ -13,7 +13,7 @@ How many dats to test all standalone webservers npm module with all simple featu
 * [x] Add: client redirects handler
 * [x] Add: url rewriting handler (proxy)
 * [x] Add: static content webserver with content rewriting
-* [x] Add: Open the web browser
+* [x] Add: open web browser option
 
 > **v1.1.0 - 02/18/2022**
 * [x] Add: static webserver with content rewriting using query string variable
