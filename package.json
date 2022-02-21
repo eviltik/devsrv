@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node ./bin/devsrv.js",
-    "build":"node ./bin/devsrv.js -b"
+    "start": "node ./bin/devsrv.js",
+    "build": "node ./bin/devsrv.js -b"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "fs-extra": "10.0.0",
     "open": "8.4.0",
     "pem": "1.14.6",
+    "serve-index": "^1.9.1",
     "serve-static": "1.14.2"
   }
 }
