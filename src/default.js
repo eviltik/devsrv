@@ -38,7 +38,7 @@ module.exports = {
     configFile:{
         opt:'-c, --config-file <configFile>',
         help:'Configuration file',
-        default:'./.devsrv.json',
+        default:'./devsrv.config.json',
         type:'string'
     },
 

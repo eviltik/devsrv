@@ -66,7 +66,7 @@ function compileRegexp( str , flags ) {
     if ( !flags )
         flags = 'ig';
 
-    // TODO: devsrv.js rather than devsrv.json so we can use native regexp to avoid this security issue
+    // TODO: devsrv.js rather than devsrv.config.json so we can use native regexp to avoid this security issue
     // SECURITY: don't reuse this code if you are not sure the value is coming from a trusted source
 
     str = str.replace( /\\\\/, '\\', str );

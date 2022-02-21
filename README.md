@@ -26,6 +26,9 @@ How many dats to test all standalone webservers npm module with all simple featu
 * [x] Add: explorer (directory listing)
 * [x] Add: npm build script (releases static files, serverless provider compliant i.e vercel )
 
+> **v1.3.2 - 02/21/2022**
+* [x] Update: change config file name
+
 ## **Roadmap**
 * [ ] CI tests
 * [ ] Network level throttling (simulate slow network for testing)
