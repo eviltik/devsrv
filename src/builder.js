@@ -1,3 +1,4 @@
+const assert = require( 'assert' );
 const path = require( 'path' );
 const fs = require( 'fs-extra' );
 
@@ -29,6 +30,8 @@ function builder() {
     let config;
 
     function build() {
+
+        assert( typeof config.buildOptions === 'object', 'buildOptions should be an object' );
 
         let dst = path.resolve( config.buildOptions.dst );
         let src = path.resolve( config.buildOptions.src );
