@@ -1,6 +1,8 @@
 {
-    "trailingSlash": true,
+    "trailingSlash": false,
     "redirects": [
-      { "source": "/", "destination": "/v1.0.0/threejs.119/index.html" }
+      { "source": "/", "destination": "/v1.0.0/threejs.119/index.html" },
+      { "source": "/:path((?!uk/).*)",
+      }
     ]
 }
