@@ -35,6 +35,13 @@ module.exports = {
         type:'boolean'
     },
 
+    monitorChanges:{
+        opt:'-m, --monitor-changes',
+        help:'Monitor file changes and reload webpage',
+        default:'false',
+        type:'boolean'
+    },
+
     configFile:{
         opt:'-c, --config-file <configFile>',
         help:'Configuration file',

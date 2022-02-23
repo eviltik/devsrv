@@ -3,6 +3,9 @@ const handlers = require( './handlers/index.js' );
 
 function prepareConfig( app, config ) {
 
+    // monitor file changes
+    handlers.monitorChanges.addHandler( app, config );
+    
     // deliver static files with text replacement
     handlers.staticTransform.addHandler( app, config );
 
@@ -18,6 +21,7 @@ function prepareConfig( app, config ) {
     // directory listing
     handlers.explorer.addHandler( app, config );
 
+    
     return app;
 
 }
