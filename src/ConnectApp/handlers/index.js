@@ -1,5 +1,6 @@
 module.exports = {
     
+    accessLog:require( './accessLog.js' ),
     staticServer: require( './staticServer.js' ),
     monitorChanges: require( './monitorChanges.js' ),
     clientRedirects: require( './clientRedirects.js' ),

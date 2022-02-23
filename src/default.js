@@ -2,21 +2,28 @@ module.exports = {
 
     documentRoot:{
         opt:'-d, --document-root <documentRoot>',
-        help:'DocumentRoot',
+        help:'Set documentRoot',
         default:'./',
         type:'string'
     },
 
+    accessLog:{
+        opt:'-a, --access-log',
+        help:'Enable access Log',
+        default:'false',
+        type:'boolean'
+    },
+
     explorer:{
         opt:'-e, --explorer',
-        help:'Directory listing',
+        help:'Enable directory listing',
         default:'false',
         type:'boolean'
     },
 
     listeningPort:{
         opt:'-l, --listening-port <listeningPort>',
-        help:'Listening port',
+        help:'Set listening port',
         default:'8443',
         type:'port'
     },

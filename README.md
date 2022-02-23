@@ -29,12 +29,12 @@ How many dats to test all standalone webservers npm module with all simple featu
 
 > **v1.4.0 - 02/23/2022**
 * [x] Add: monitor file changes and reload web page, no websocket but Server Side Events (SSE)
+* [x] Add: simple access log
 
 ## **Roadmap**
 * [ ] CI tests
-* [ ] Network level throttling (simulate slow network for testing)
-* [ ] Access log
-* [ ] Systemd template
+* [ ] Network level throttling (simulate slow network for testing) ?
+* [ ] Systemd template ?
 * [ ] Websocket proxy ?
 * [ ] WebRTC ?
 
@@ -67,6 +67,7 @@ Instant self signed certificate https web server for developer.
 Options:
   -V, --version                         output the version number
   -d, --document-root <documentRoot>    DocumentRoot (default: "./")
+  -a, --access-log                      Enable access Log
   -e, --explorer                        Directory listing (default: false)
   -l, --listening-port <listeningPort>  Listening port (default: 8443)
   -i, --interface <interfaceRegexp>     Network interface filter (regular expression)
@@ -138,6 +139,7 @@ serverInstance.start();
     "listeningPort": 8443,
     "interfaceRegexp": "/wi-fi|eth0/i",
     "openBrowser": true,
+    "accessLog": true,
     "clientRedirects":[
         {
             "urlSrc":"/",

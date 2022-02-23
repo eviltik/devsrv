@@ -72,13 +72,13 @@ function addHandler( app, config ) {
             response:res
         };
 
-        log.info( `adding client ${newClient.id}` );
+        log.debug( `adding client ${newClient.id}` );
       
         clients.push( newClient );
       
         req.on( 'close', () => {
 
-            console.log( `${clientId} Connection closed` );
+            log.debug( `${clientId} Connection closed` );
             clients = clients.filter( client => client.id !== clientId );
 
         } );
@@ -86,8 +86,6 @@ function addHandler( app, config ) {
     }
       
     app.use( ( req, res, next ) => {
-
-        console.log( req.method, req.url );
 
         if ( req.url === '/devsrv' && req.method === 'GET' )
             eventsHandler( req, res );

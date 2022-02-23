@@ -3,9 +3,12 @@ const handlers = require( './handlers/index.js' );
 
 function prepareConfig( app, config ) {
 
+    // access logger
+    handlers.accessLog.addHandler( app, config );
+
     // monitor file changes
     handlers.monitorChanges.addHandler( app, config );
-    
+
     // deliver static files with text replacement
     handlers.staticTransform.addHandler( app, config );
 
