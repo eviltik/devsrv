@@ -3,7 +3,7 @@ const el = document.getElementById( 'version' );
 el.innerHTML = 'THREEJSVERSION (coming from js)';
 
 const evtSource = new EventSource( '/devsrv' );
-evtSource.addEventListener( 'reload', reload);
+evtSource.addEventListener( 'reload', reload );
 evtSource.onerror = onerror;
 
 function reload() {

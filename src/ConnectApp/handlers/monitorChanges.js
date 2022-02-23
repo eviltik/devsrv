@@ -23,7 +23,9 @@ function addHandler( app, config ) {
     let clients = [];
     let timer;
 
-    function onChange( event, filename ) {
+    function onChange() {
+
+        // event, filename
 
         clearTimeout( timer );
 
@@ -48,7 +50,7 @@ function addHandler( app, config ) {
 
     }
 
-    function eventsHandler( req, res, next ) {
+    function eventsHandler( req, res ) {
 
         const headers = {
             'Content-Type': 'text/event-stream',
