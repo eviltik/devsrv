@@ -38,10 +38,11 @@ function addHandler( app, config ) {
     }
 
     function broadcast( event, data = '' ) {
+        
+        log.info( `monitorChanges: sending ${event} to clients` );
 
         clients.forEach( client => {
 
-            log.info( `sending ${event} to ${client.id}` );
             client.response.write( `event: ${event}\n` );
             client.response.write( `data: ${data}\n` );
             client.response.write( '\n\n' );
