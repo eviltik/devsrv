@@ -9,6 +9,9 @@ function addHandler( app, config ) {
     assert( typeof app === 'function', 'app should be a function' );
     assert( typeof config == 'object', 'config should be an object' );
 
+    if ( !config.monitorChanges )
+        return;
+
     if ( !config.documentRoot )
         throw new Error( 'monitorChanges: documentRoot is mandatory' );
 
