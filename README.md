@@ -35,6 +35,9 @@ How many dats to test all standalone webservers npm module with all simple featu
 * [x] Fix: check config before start monitoring file changes
 * [x] Add: simple access log
 
+> **v1.4.2 - 02/24/2022**
+* [x] Fix: use session to store query var value
+
 ## **Roadmap**
 * [ ] CI tests
 * [ ] Network level throttling (simulate slow network for testing) ?
