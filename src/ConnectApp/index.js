@@ -3,6 +3,9 @@ const handlers = require( './handlers/index.js' );
 
 function prepareConfig( app, config ) {
 
+    // session handler
+    handlers.session.addHandler( app, config );
+
     // access logger
     handlers.accessLog.addHandler( app, config );
 
@@ -23,7 +26,6 @@ function prepareConfig( app, config ) {
 
     // directory listing
     handlers.explorer.addHandler( app, config );
-
     
     return app;
 

@@ -1,5 +1,6 @@
 module.exports = {
     
+    session:require( './session.js' ),
     accessLog:require( './accessLog.js' ),
     staticServer: require( './staticServer.js' ),
     monitorChanges: require( './monitorChanges.js' ),

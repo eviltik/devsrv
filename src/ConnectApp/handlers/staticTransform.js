@@ -78,8 +78,19 @@ function addHandler( app, config ) {
         let finalValue =  ctr.value || ctr.defaultValue;
 
         // change the value with the one found in the query string 
-        if ( queryStringVarValue && ctr.queryVarRegexp && queryStringVarValue.match( ctr.queryVarRegexp ) )
+        if ( queryStringVarValue && ctr.queryVarRegexp && queryStringVarValue.match( ctr.queryVarRegexp ) ) {
+
+            if ( req.session )
+                req.session[ ctr.queryVar ] = queryStringVarValue;
+
             finalValue = queryStringVarValue;
+
+        } else {
+
+            if ( req.session && req.session[ ctr.queryVar ] )
+                finalValue = req.session[ ctr.queryVar ];
+
+        }
 
         // replace content
         content = content.toString().replace( ctr.replaceRegexp, finalValue );
