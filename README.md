@@ -4,7 +4,7 @@ A nodejs http(s) server for web development with some cool features.
 
 ## **Motivation**
 
-How many dats to test all standalone webservers npm module with all simple features i'm looking for, vs time to code it. I coded it.
+How many days to test all standalone webservers npm module with all simple features i'm looking for, vs time to code it. I coded it.
 
 ## **Changelog**
 
