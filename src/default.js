@@ -51,8 +51,8 @@ module.exports = {
 
     configFile:{
         opt:'-c, --config-file <configFile>',
-        help:'Configuration file',
-        default:'./devsrv.config.json',
+        help:'Configuration file, .json or .js',
+        default:'./devsrv.config.js',
         type:'string'
     },
 

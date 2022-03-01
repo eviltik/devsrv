@@ -61,6 +61,13 @@ function getIpAddress( interfaceRegexp ) {
 
 function compileRegexp( str , flags ) {
 
+    if ( str instanceof RegExp ) {
+
+        // already a regexp
+        return str;
+        
+    }
+
     assert( typeof str === 'string', 'str should be a string' );
     
     if ( !flags )

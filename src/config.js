@@ -81,26 +81,13 @@ function clean( config ) {
 
 }
 
-function mergeWithConfigFile( config ) {
-
-    if ( !config.configFile )
-        return;
-
-    if ( configCache )
-        return configCache;
+function readConfigJSON( filePath ) {
 
     let configFromFile;
 
-    if ( !fs.pathExistsSync( config.configFile ) ) {
-
-        log.debug( `error: config file ${config.configFile} not found` );
-        return config;
-
-    }
-
     try {
         
-        configFromFile = fs.readJsonSync( config.configFile );
+        configFromFile = fs.readJsonSync( filePath );
 
     } catch( err ) {
         
@@ -113,6 +100,56 @@ function mergeWithConfigFile( config ) {
         }
 
     }
+
+    log.debug( `config: using json config file ${filePath}` );
+
+    return configFromFile;
+
+}
+
+function readConfigJS( filePath ) {
+
+    if ( !fs.pathExistsSync( filePath ) ) 
+        return;
+
+    log.debug( `config: using js config file ${filePath}` );
+    const configFromFile = require( filePath );
+    return configFromFile;
+
+}
+
+function readCustomConfig( config ) {
+
+    if ( !config.configFile ) return;
+    
+    let configFromFile;
+
+    if ( config.configFile.match( /\.js$/ ) )
+        configFromFile= readConfigJS( config.configFile );
+
+    if ( config.configFile.match( /\.json$/ ) )
+        configFromFile = readConfigJSON( config.configFile );
+
+    return configFromFile;
+
+}
+
+function mergeWithConfigFile( config ) {
+
+    if ( !config.configFile )
+        return;
+
+    if ( configCache )
+        return configCache;
+
+    if ( !fs.pathExistsSync( config.configFile ) ) {
+
+        log.warn( `error: config file ${config.configFile} not found` );
+        return config;
+
+    }
+
+    const configFromFile = readCustomConfig ( config );
 
     if ( configFromFile ) {
 
