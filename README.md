@@ -38,6 +38,10 @@ How many days to test all standalone webservers npm module with all simple featu
 > **v1.4.2 - 02/24/2022**
 * [x] Fix: use session to store query var value
 
+> **v1.5.2 - 03/01/2022**
+* [x] Add: monitor options, see #1
+* [x] Add: js config file, see #2
+
 ## **Roadmap**
 * [ ] CI tests
 * [ ] Network level throttling (simulate slow network for testing) ?
@@ -80,7 +84,7 @@ Options:
   -i, --interface <interfaceRegexp>     Network interface filter (regular expression)
   -o, --open-browser                    Open the browser (default: false)
   -m, --monitor-changes                 Monitor file changes and reload webpage (default: false)
-  -c, --config-file <configFile>        Configuration file (default: "./devsrv.config.json")
+  -c, --config-file <configFile>        Configuration file (default: "./devsrv.config.js")
   -b, --build                           trigger build process (default: false)
   --build-dst <buildDst>                build dist directory (default: "./dist/1.0.0/")
   --build-src <buildSrc>                build src directory (default: "./public")
@@ -90,7 +94,7 @@ Options:
 
 #### Optional config file
 
-> When starting, the process try to read `./.devsrv.json` in the current directory or in specified `--config-file` directory config option.
+> When starting, the process try to read `./.devsrv.js` in the current directory or in specified `--config-file` directory config option.
 
 
 
@@ -141,42 +145,41 @@ serverInstance.start();
 
 
 ```
-{
-    "documentRoot": "./",
-    "listeningPort": 8443,
-    "interfaceRegexp": "/wi-fi|eth0/i",
-    "openBrowser": true,
-    "accessLog": true,
-    "clientRedirects":[
+const config = {
+    documentRoot: './tests',
+    interfaceRegexp: /wi-fi|eth0/i,
+    openBrowser: true,
+    clientRedirects:[
         {
-            "urlSrc":"/",
-            "redirectTo":"/tests/index.html"
+            urlSrc:'/',
+            redirectTo:'/tests/index.html'
         }
     ],
-    "urlRewrites": [
+    urlRewrites: [
         {
-            "urlSrcRegexp":"^/test2",
-            "replaceBy":"/test"
+            urlSrcRegexp:/^\/tests2/,
+            replaceWith:'/tests'
         }
     ],
-    "textReplacements": [
+    textReplacements: [
         {
-            "queryVar":"r",
-            "queryVarRegexp":"^0\\.[0-9]{3}$",
-            "replaceRegexp":"THREEJSVERSION",
-            "defaultValue":"0.119",
-            "pathRegexp":"(\\.(html|js))|(\\/)$"
+            queryVar:'r',
+            queryVarRegexp:/^0\.[0-9]{3}$/,
+            replaceRegexp:/THREEJSVERSION/g,
+            defaultValue:'0.119',
+            pathRegexp:/\.(html|js)|(\/)$/
         }
     ],
-    "buildOptions": {
-        "src":"./tests",
-        "dst":"./dist/v1.0.0/threejs-r119",
-        "replaceRegexp":"THREEJSVERSION",
-        "defaultValue":"0.119",
-        "pathRegexp":"\\.(html|js)$"
+    monitorOptions:{
+        enable:false,
+        directories:[ './' ],
+        fileRegexp:/\.(html|jsm?)$/,
+        excludeRegexp: /node_modules/
     }
+};
 
-}
+module.exports = config;
+
 ```
 
 
@@ -198,7 +201,7 @@ server: ready
 
 ## Build process
 
-`devsrv -b` will trigger build process. You can add this in `devsrv.config.json`:
+`devsrv -b` will trigger build process. You can add this in `devsrv.config.js`:
 ```
 "buildOptions": {
         "src":"./tests",
@@ -221,6 +224,14 @@ each time a file or directory has changed. The browser use a SSE client to recei
 Under the wood, `fs.watch` is used. In tests/index.html you will find the peace of 
 code to use to handle Server Side Event Events ("reload" event only).
 
+```
+monitorOptions:{
+    enable:false,
+    directories:[ './' ],
+    fileRegexp:/\.(html|jsm?)$/,
+    excludeRegexp: /node_modules/
+}
+```
 
 ## Debugging
 
