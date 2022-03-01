@@ -1,6 +1,17 @@
 const assert = require( 'assert' );
+const deepmerge = require( 'deepmerge' );
 const path = require( 'path' );
 const fs = require( 'fs-extra' );
+
+const DEFAULT_OPTIONS = {
+
+    enable:true,
+    directories:[],
+    excludeRegexp: /node_modules/,
+    fileRegexp:/\.(html|jsm?)$/
+
+};
+
 
 const log = require( '../../logger.js' );
 
@@ -9,31 +20,72 @@ function addHandler( app, config ) {
     assert( typeof app === 'function', 'app should be a function' );
     assert( typeof config == 'object', 'config should be an object' );
 
+    if ( !config.monitorOptions )
+        config.monitorOptions = DEFAULT_OPTIONS;
+    else
+        config.monitorOptions = deepmerge( DEFAULT_OPTIONS, config.monitorOptions , { } );
+
+    if ( typeof config.monitorOptions.fileRegexp === 'string' )
+        config.monitorOptions.fileRegexp = new RegExp( config.monitorOptions.fileRegexp );
+
+    if ( typeof config.monitorOptions.excludeRegexp === 'string' )
+        config.monitorOptions.excludeRegexp = new RegExp( config.monitorOptions.excludeRegexp );
+
+    // command line option check
     if ( !config.monitorChanges )
-        return;
+        if ( !config.monitorOptions.enable )
+            return;
 
-    if ( !config.documentRoot )
-        throw new Error( 'monitorChanges: documentRoot is mandatory' );
+    if ( !config.monitorOptions.directories || !config.monitorOptions.directories.length )
+        throw new Error( 'monitorChanges: monitorOptions.directories should contain an array of path' );
 
-    config.documentRoot = path.resolve( config.documentRoot );
-    if ( !fs.pathExistsSync( config.documentRoot ) )
-        throw new Error( `monitorChanges: documentRoot ${config.documentRoot} does not exists` );
 
-    log.info( `monitorChanges: monitor changes for ${config.documentRoot} ` );
+    config.monitorOptions.directories.forEach( dir => {
+        
+        dir = path.resolve( dir );
 
-    fs.watch( config.documentRoot, { recursive:true }, onChange );
+        if ( !fs.pathExistsSync( dir ) )
+            throw new Error( `monitorChanges: directory ${dir} does not exists` );
 
+        log.info( `monitorChanges: monitor changes for directory ${dir} ` );
+
+        fs.watch( dir, { recursive:true }, onChange );
+
+
+    } );
+    
     let clients = [];
     let timer;
 
-    function onChange() {
+    function onChange( event, filename ) {
 
-        // event, filename
+        if ( !filename )
+            return;
 
-        clearTimeout( timer );
+        if ( config.monitorOptions.fileRegexp ) 
+            if( !filename.match( config.monitorOptions.fileRegexp ) ) {
+
+                log.debug( `monitorChanges: ignore event ${event} for file ${filename}` );
+                return;
+
+            }
+
+        if ( config.monitorOptions.excludeRegexp ) 
+            if( filename.match( config.monitorOptions.excludeRegexp ) ) {
+
+                log.debug( `monitorChanges: exclude event ${event} for file ${filename}` );
+                return;
+
+            }
+
+
+        if ( timer )
+            clearTimeout( timer );
+
 
         timer = setTimeout( () => {
 
+            log.info( `monitorChanges: event ${event} for file ${filename}` );
             broadcast( 'reload' );
 
         }, 100 );
