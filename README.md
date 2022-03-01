@@ -38,7 +38,7 @@ How many days to test all standalone webservers npm module with all simple featu
 > **v1.4.2 - 02/24/2022**
 * [x] Fix: use session to store query var value
 
-> **v1.5.2 - 03/01/2022**
+> **v1.5.0 - 03/01/2022**
 * [x] Add: monitor options, see #1
 * [x] Add: js config file, see #2
 
