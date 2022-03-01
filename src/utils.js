@@ -61,6 +61,9 @@ function getIpAddress( interfaceRegexp ) {
 
 function compileRegexp( str , flags ) {
 
+    if ( !str )
+        return;
+
     if ( str instanceof RegExp ) {
 
         // already a regexp
@@ -68,13 +71,11 @@ function compileRegexp( str , flags ) {
         
     }
 
-    assert( typeof str === 'string', 'str should be a string' );
+    assert( typeof str === 'string', `compileRegexp: first arguments should be a string or a regexp, actual ${typeof str}` );
     
     if ( !flags )
         flags = 'ig';
 
-    // TODO: devsrv.js rather than devsrv.config.json so we can use native regexp to avoid this security issue
-    // SECURITY: don't reuse this code if you are not sure the value is coming from a trusted source
 
     str = str.replace( /\\\\/, '\\', str );
     
