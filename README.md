@@ -42,6 +42,9 @@ How many days to test all standalone webservers npm module with all simple featu
 * [x] Add: monitor options, see #1
 * [x] Add: js config file, see #2
 
+> **v1.5.1 - 03/02/2022**
+* [x] Fix package version
+
 ## **Roadmap**
 * [ ] CI tests
 * [ ] Network level throttling (simulate slow network for testing) ?
