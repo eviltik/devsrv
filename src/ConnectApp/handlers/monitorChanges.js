@@ -88,7 +88,7 @@ function addHandler( app, config ) {
             log.info( `monitorChanges: event ${event} for file ${filename}` );
             broadcast( 'reload' );
 
-        }, 100 );
+        }, 500 );
 
     }
 

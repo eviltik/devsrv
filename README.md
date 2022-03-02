@@ -6,53 +6,6 @@ A nodejs http(s) server for web development with some cool features.
 
 How many days to test all standalone webservers npm module with all simple features i'm looking for, vs time to code it. I coded it.
 
-## **Changelog**
-
-> **v1.0.0 - 02/18/2022**
-* [x] Add: use HTTPS with generated self signed SSL certificates by default
-* [x] Add: client redirects handler
-* [x] Add: url rewriting handler (proxy)
-* [x] Add: static content webserver with content rewriting
-* [x] Add: open web browser option
-
-> **v1.1.0 - 02/18/2022**
-* [x] Add: static webserver with content rewriting using query string variable
-
-> **v1.3.0 - 02/18/2022**
-* [x] Add: detect Codesandbox, then use http rather than https, because of Codesandbox reverse proxy ssl termination
-
-> **v1.3.1 - 02/21/2022**
-* [x] Change: code refactor
-* [x] Change: change config file name 
-* [x] Add: explorer (directory listing)
-* [x] Add: npm build script (releases static files, serverless provider compliant i.e vercel )
-
-> **v1.4.0 - 02/23/2022**
-* [x] Add: monitor file changes and reload web page, no websocket but Server Side Events (SSE)
-* [x] Add: simple access log
-
-> **v1.4.1 - 02/23/2022**
-* [x] Fix: check config before start monitoring file changes
-* [x] Add: simple access log
-
-> **v1.4.2 - 02/24/2022**
-* [x] Fix: use session to store query var value
-
-> **v1.5.0 - 03/01/2022**
-* [x] Add: monitor options, see #1
-* [x] Add: js config file, see #2
-
-> **v1.5.1 - 03/02/2022**
-* [x] Fix package version
-
-## **Roadmap**
-* [ ] CI tests
-* [ ] Network level throttling (simulate slow network for testing) ?
-* [ ] Systemd template ?
-* [ ] Websocket proxy ?
-* [ ] WebRTC ?
-
-
 ## **Command Line Usage**
 
 > You can use `devsrv` as a standalone webserver.
@@ -239,3 +192,54 @@ monitorOptions:{
 ## Debugging
 
 > Set env var `DEBUG` with any value i.e `DEBUG=* devsrv`.
+
+
+## **Changelog**
+
+> **v1.0.0 - 02/18/2022**
+* [x] Add: use HTTPS with generated self signed SSL certificates by default
+* [x] Add: client redirects handler
+* [x] Add: url rewriting handler (proxy)
+* [x] Add: static content webserver with content rewriting
+* [x] Add: open web browser option
+
+> **v1.1.0 - 02/18/2022**
+* [x] Add: static webserver with content rewriting using query string variable
+
+> **v1.3.0 - 02/18/2022**
+* [x] Add: detect Codesandbox, then use http rather than https, because of Codesandbox reverse proxy ssl termination
+
+> **v1.3.1 - 02/21/2022**
+* [x] Change: code refactor
+* [x] Change: change config file name 
+* [x] Add: explorer (directory listing)
+* [x] Add: npm build script (releases static files, serverless provider compliant i.e vercel )
+
+> **v1.4.0 - 02/23/2022**
+* [x] Add: monitor file changes and reload web page, no websocket but Server Side Events (SSE)
+* [x] Add: simple access log
+
+> **v1.4.1 - 02/23/2022**
+* [x] Fix: check config before start monitoring file changes
+* [x] Add: simple access log
+
+> **v1.4.2 - 02/24/2022**
+* [x] Fix: use session to store query var value
+
+> **v1.5.0 - 03/01/2022**
+* [x] Add: monitor options, see #1
+* [x] Add: js config file, see #2
+
+> **v1.5.1 - 03/02/2022**
+* [x] Fix package version pb
+
+> **v1.5.1 - 03/02/2022**
+* [x] More delay for file changes
+
+## **Roadmap**
+* [ ] CI tests
+* [ ] Network level throttling (simulate slow network for testing) ?
+* [ ] Systemd template ?
+* [ ] Websocket proxy ?
+* [ ] WebRTC ?
+
