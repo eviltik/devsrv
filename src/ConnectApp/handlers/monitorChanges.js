@@ -32,9 +32,11 @@ function addHandler( app, config ) {
         config.monitorOptions.excludeRegexp = new RegExp( config.monitorOptions.excludeRegexp );
 
     // command line option check
-    if ( !config.monitorChanges )
-        if ( !config.monitorOptions.enable )
-            return;
+    if ( !config.monitorChanges || typeof config.monitorChanges != 'object' )
+        return;
+    
+    if ( !config.monitorOptions.enable )
+        return;
 
     if ( !config.monitorOptions.directories || !config.monitorOptions.directories.length )
         throw new Error( 'monitorChanges: monitorOptions.directories should contain an array of path' );
